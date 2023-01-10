@@ -1,5 +1,4 @@
 class StarWarsCharacter {
-
   final String name;
   final int height;
   final int mass;
@@ -11,7 +10,15 @@ class StarWarsCharacter {
       this.homeworld, this.selfUrl);
 
   factory StarWarsCharacter.fromJson(Map<String, dynamic> data) {
-    return StarWarsCharacter(data['name'], int.parse(data['height']), int.parse(data['mass']), data['birth_year'], data['homeworld'], data['url']);
+    RegExp selfUrlExp = RegExp(r'https://swapi\.dev/api/people/(\d+)/');
+    RegExpMatch? selfIdMatch = selfUrlExp.firstMatch(data['url']);
+    return StarWarsCharacter(
+      data['name'],
+      int.parse(data['height']),
+      int.parse(data['mass']),
+      data['birth_year'],
+      data['homeworld'],
+      selfIdMatch![1] ?? '',
+    );
   }
-
 }

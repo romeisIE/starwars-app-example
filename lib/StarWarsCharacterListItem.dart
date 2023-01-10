@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:starwars/StarWarsCharacter.dart';
 
 class StarWarsCharacterListItem extends StatelessWidget {
 
-  final String name;
-  final String homeworld;
+  final StarWarsCharacter character;
 
-  const StarWarsCharacterListItem(this.name, this.homeworld, {super.key});
+  const StarWarsCharacterListItem(this.character, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,15 +16,17 @@ class StarWarsCharacterListItem extends StatelessWidget {
         children: <Widget>[
           ListTile(
             leading: const Icon(Icons.person),
-            title: Text(name),
-            subtitle: Text("From the homeplanet: $homeworld"),
+            title: Text(character.name),
+            subtitle: Text("From the homeplanet: ${character.homeworld}"),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
               TextButton(
                 child: const Text('DETAILS'),
-                onPressed: () {/* ... */},
+                onPressed: () {
+                  context.push("/details/${character.selfUrl}");
+                },
               ),
               const SizedBox(width: 8),
             ],

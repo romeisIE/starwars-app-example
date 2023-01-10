@@ -15,4 +15,15 @@ class StarWarsCharacterRepository {
 
     return Future.value(list);
   }
+
+  Future<StarWarsCharacter> getCharacter(String id) async {
+    log("Retrieving star wars character data");
+    var url = Uri.https('swapi.dev', "/api/people/$id");
+    final body = await http.read(url);
+    final json = jsonDecode(body) as Map<String,dynamic>;
+
+    final character = StarWarsCharacter.fromJson(json);
+
+    return Future.value(character);
+  }
 }
