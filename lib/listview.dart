@@ -20,7 +20,7 @@ class StarWarsListView extends StatelessWidget {
         builder: (context, snapshot) {
           if(snapshot.hasData) {
             return ListView(
-              padding: const EdgeInsets.all(0),
+              padding: const EdgeInsets.all(8),
               children: snapshot.data?.map((e) => StarWarsCharacterListItem(e.name, e.homeworld)).toList() ?? const <Widget>[Text("Leere Liste")],
             );
           } else if(snapshot.hasError) {
